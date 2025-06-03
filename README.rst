@@ -421,12 +421,10 @@ The header level is detected automatically.
 Adjust header level
 +++++++++++++++++++
 
-With the cursor in a header, pressing ``ctrl + +`` (plus key) and ``ctrl + -``
-(minus key) (``alt + +`` and ``alt + -``, in Mac) will increase and decrease the
-header level respectively. The adornment decoration (underline / overline) is
-autodetected from the document and uses
-`Sphinx's conventions <https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#sections>`__
-by default.
+With the cursor in a header, pressing ``ctrl + +`` (plus key) and ``ctrl + -`` (minus
+key) (``alt + +`` and ``alt + -``, in Mac) will increase and decrease the header level
+respectively.  The adornment decoration (underline / overline) is autodetected from the
+document and uses the Sphinx conventions from many years ago by default.
 
 For example, you have the cursor in::
 
@@ -438,6 +436,34 @@ Which is a header level 2 and want to convert to a level 3, press ``ctrl + -`` t
     Magic Footnotes|
     +++++++++++++++
 
+.. note::
+
+    If you wish to customize these to your own standard section-header adornments,
+    you can do so by ensuring this Package is installed as a ``.sublime-package``
+    file and then overriding the ``headers.py`` file in an file in an
+    `Override Package <https://docs.sublimetext.io/guide/extensibility/packages.html#package-types>`__,
+    search for ``DEFAULT_HEADERS`` in the ``RstHeaderTree`` class and set it to a list
+    of strings where the string at index 0 represents the syntax for your
+    highest-level section header  (``<h1>``), and the string at index 5 represents
+    the syntax for your lowest-level section header (``<h6>``).  Two matching
+    characters together cause the section heading to have over/under adornment.
+
+    Exxample:
+
+    .. code-block:: python
+
+        DEFAULT_HEADERS = '## ** = - ^ "'.split()
+
+    follows the `Sphinx reStructuredText Primer suggestion
+    <https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#sections>`__
+    as of 03-Jun-2025 which is documented as:
+
+    - # with overline, for parts
+    - \* with overline, for chapters
+    - = for sections
+    - \- for subsections
+    - ^ for subsubsections
+    - \" for paragraphs
 
 
 Magic Footnotes
