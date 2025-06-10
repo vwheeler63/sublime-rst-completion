@@ -292,9 +292,11 @@ class SmartFoldingCommand(sublime_plugin.TextCommand):
             # `unindent` when user is editing reSTructuredText), this ELSE block
             # must check a few more variables.  Namely:  3 things govern normal
             # [shift+tab] behavior:
+            #
             # A.  If multiple lines selected (text contains "\n"), run `unindent` command.
             # B.  If text before cursor is zero or more tabs or spaces, run `unindent` command.
             # C.  If `settings.shift_tab_unindent` == True, then run `unindent` command.
+            #
             # Otherwise, when user is editing reSTructuredText files, tab gets
             # inserted when it should be running `unindent` command.  These rules
             # are shown in the default Sublime Text [shift+tab] key bindings.
@@ -320,7 +322,7 @@ class SmartFoldingCommand(sublime_plugin.TextCommand):
                 return
             else:
                 left_of_cursor_text = line_text[0:diff]
-                if diff == 0 or re.match(r'^[\t ]+$', left_of_cursor_text):
+                if re.match(r'^[\t ]+$', left_of_cursor_text):
                     # Only tabs or spaces to the left of cursor.
                     self.view.run_command('unindent')
                     return
